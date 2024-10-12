@@ -18,5 +18,4 @@ app.use("/feedback", contactRoutes);
 app.use("/career", careerRoutes);
 
 // Server
-const PORT = process.env.PORT;
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+module.exports = app;
