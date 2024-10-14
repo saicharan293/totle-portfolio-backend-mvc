@@ -10,10 +10,19 @@ const app = express();
 
 // Middleware
 // app.use(cors());
+const allowedOrigins = ['https://www.totle.ltd']; // Replace with your actual frontend domain
+
+// Global CORS middleware
 app.use(cors({
-  origin: 'https://totle.ltd', // replace with your actual domain
-  methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true); // Allow request if origin is in allowedOrigins
+    } else {
+      callback(new Error('Not allowed by CORS')); // Block request if origin is not allowed
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow any methods you need
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allow necessary headers
 }));
 
 app.use(bodyParser.json());
