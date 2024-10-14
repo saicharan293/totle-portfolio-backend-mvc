@@ -9,7 +9,13 @@ const careerRoutes = require("./src/routes/careerRoutes");
 const app = express();
 
 // Middleware
-app.use(cors());
+// app.use(cors());
+app.use(cors({
+  origin: 'https://totle.ltd', // replace with your actual domain
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
