@@ -30,7 +30,7 @@ exports.applyForJob = async (name, email, reason, resume) => {
 
     // Send email with application details and resume attached
     await transporter.sendMail(mailOptions);
-    // await careerRepository.saveCareerApplication(name, email, reason);
+    await careerRepository.saveCareerApplication(name, email, reason);
     
     // Since we're not saving the application, you can return a success message here
     return { success: true, message: "Application sent successfully." };
