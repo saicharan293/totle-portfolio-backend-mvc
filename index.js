@@ -9,9 +9,24 @@ const careerRoutes = require("./src/routes/careerRoutes");
 const app = express();
 
 // Middleware
-app.use(cors());
+const allowedOrigins = ['https://www.totle.ltd', 'https://mail.google.com'];
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
+
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use('/',(req,res)=>{
+    res.send("shuru")
+})
 
 // Routes
 app.use("/feedback", contactRoutes);
